@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import LemonName from "../../assets/svg/LemonName";
+import GradientText from "../components/utils/GradientText";
 
 export default function Login({ navigation }: any) {
   const insets = useSafeAreaInsets();
@@ -57,6 +58,12 @@ export default function Login({ navigation }: any) {
           autoCapitalize="none"
           keyboardType="email-address"
         />
+        <LinearGradient
+          colors={["#87DBFF", "#EAC7FF"]}
+          start={[0, 0]}
+          end={[1, 1]}
+          style={styles.borderInput}
+        ></LinearGradient>
         <View
           style={{
             width: "100%",
@@ -79,6 +86,12 @@ export default function Login({ navigation }: any) {
               style={styles.hideIcon}
             />
           </Pressable>
+          <LinearGradient
+            colors={["#87DBFF", "#EAC7FF"]}
+            start={[0, 0]}
+            end={[1, 1]}
+            style={styles.borderInput}
+          ></LinearGradient>
         </View>
         <View style={styles.forgotContainer}>
           <Pressable>
@@ -103,15 +116,20 @@ export default function Login({ navigation }: any) {
         <View style={styles.createLinkContainer}>
           <Text style={styles.createLinkMessage}>¿No tienes cuenta?</Text>
           <Pressable style={styles.createLinkButton}>
-            <Text style={styles.createLink}>Crea una.</Text>
+            <GradientText
+              colors={["#87DBFF", "#EAC7FF"]}
+              style={styles.createLink}
+            >
+              Crea una.
+            </GradientText>
           </Pressable>
         </View>
         <View style={styles.optionContainer}>
           <LinearGradient
             style={styles.line}
             colors={["#87DBFF", "#EAC7FF"]}
-            end={[0, 0]}
-            start={[1, 1]}
+            end={[1, 1]}
+            start={[0, 0]}
           ></LinearGradient>
           <View>
             <Text style={styles.option}>O</Text>
@@ -119,8 +137,8 @@ export default function Login({ navigation }: any) {
           <LinearGradient
             style={styles.line}
             colors={["#87DBFF", "#EAC7FF"]}
-            end={[0, 0]}
-            start={[1, 1]}
+            end={[1, 1]}
+            start={[0, 0]}
           ></LinearGradient>
         </View>
         <Pressable style={styles.pressable}>
@@ -199,10 +217,12 @@ const styles = StyleSheet.create({
   input: {
     color: "#ffffff",
     width: "100%",
-    borderBottomWidth: 1,
-    borderBottomColor: "#87DBFF",
     fontSize: 16,
     fontWeight: "700",
+  },
+  borderInput: {
+    width: "100%",
+    height: 1,
   },
   hideIcon: {
     position: "absolute",
@@ -219,7 +239,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "rgba(255,255,255,0.7)",
     textAlign: "right",
-    fontWeight: "200",
+    fontWeight: "300",
     marginTop: 9,
     marginBottom: 33,
   },
@@ -250,7 +270,6 @@ const styles = StyleSheet.create({
   createLink: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#87DBFF",
   },
   optionContainer: {
     flexDirection: "row",
@@ -263,7 +282,7 @@ const styles = StyleSheet.create({
     height: 1,
   },
   option: {
-    width: 50,
+    width: 20,
     textAlign: "center",
     fontSize: 16,
     fontWeight: "700",

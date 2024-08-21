@@ -9,15 +9,15 @@ interface Props {
 const Stat = ({ image, value }: Props) => {
   return (
     <View style={styles.statContainer}>
-      <Pressable>
+      <Pressable style={styles.pressable}>
         <Image
           style={styles.imageStat}
           source={{
             uri: image,
           }}
         />
+        <Text style={styles.statNumber}>{value}</Text>
       </Pressable>
-      <Text style={styles.statNumber}>{value}</Text>
     </View>
   );
 };
@@ -26,8 +26,10 @@ export default Stat;
 
 const styles = StyleSheet.create({
   statContainer: {
-    flexDirection: "row",
     alignItems: "center",
+  },
+  pressable: {
+    flexDirection: "row",
   },
   imageStat: {
     width: 15,
