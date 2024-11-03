@@ -5,11 +5,20 @@ import HeaderComponent from "../components/ui/HeaderUi";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PublicationComponent from "../components/ui/PublicationUi";
 import { useScreenDimensions } from "../helpers/Dimension";
+import { FeedRequest, Post } from "../types/publication";
 
 const FeedScreen = () => {
   const insets = useSafeAreaInsets();
   const { height } = useScreenDimensions();
-  const [feed, setFeed] = useState();
+  const [feed, setFeed] = useState<Post[]>([]);
+
+  function formatDate(date: Date) {
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  }
 
   useEffect(() => {
     const fecthData = async () => {
@@ -19,7 +28,7 @@ const FeedScreen = () => {
           method: "GET",
         },
       );
-      const data = await request.json();
+      const data: FeedRequest = await request.json();
       setFeed(data.feed);
     };
     fecthData();
@@ -39,7 +48,7 @@ const FeedScreen = () => {
                 profileImage={item.author.image}
                 userName={item.author.name}
                 userNickName={item.author.nickName}
-                datePublication={item.date}
+                datePublication={formatDate(new Date(item.date))}
                 publicationTitle={item.data}
                 imagePublication={item.image}
                 comment={item.comment.length}
