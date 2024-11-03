@@ -1,6 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet, View, Image, Pressable, TextInput } from "react-native";
+import { auth } from "../../helpers/dataTest";
 
 const HeaderComponent = () => {
   return (
@@ -13,7 +14,7 @@ const HeaderComponent = () => {
           <Image
             style={styles.imageProfile}
             source={{
-              uri: "https://res.cloudinary.com/ivannavas/image/upload/v1723778090/red_social/perfil_images/yjnufaycsjyphf62p5bj.jpg",
+              uri: auth.userImage,
             }}
           />
         </Pressable>

@@ -1,39 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import HeaderComponent from "../components/ui/HeaderUi";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PublicationComponent from "../components/ui/PublicationUi";
-import { data } from "../helpers/dataTest";
+import { useScreenDimensions } from "../helpers/Dimension";
 
 const FeedScreen = () => {
   const insets = useSafeAreaInsets();
+  const { height } = useScreenDimensions();
+  const [feed, setFeed] = useState();
+
+  useEffect(() => {
+    const fecthData = async () => {
+      const request = await fetch(
+        "http://192.168.1.5:3000/api/publication/feed",
+        {
+          method: "GET",
+        },
+      );
+      const data = await request.json();
+      setFeed(data.feed);
+    };
+    fecthData();
+  }, []);
 
   return (
     <View style={[styles.mainContainer, { paddingTop: insets.top }]}>
       <StatusBar style="light" />
       <HeaderComponent />
-      <View style={styles.publicationsContainer}>
+      <View style={[styles.publicationsContainer, { height: height * 0.78 }]}>
         <FlatList
-          data={data}
+          data={feed}
           renderItem={({ item }) => (
             <View key={item.id}>
               <PublicationComponent
                 id={item.id}
-                profileImage={item.profileImage}
-                userName={item.userName}
-                userNickName={item.userNickName}
-                datePublication={item.datePublication}
-                publicationTitle={item.publicationTitle}
-                imagePublication={item.imagePublication}
-                comment={item.comment}
-                share={item.share}
-                like={item.like}
-                view={item.view}
+                profileImage={item.author.image}
+                userName={item.author.name}
+                userNickName={item.author.nickName}
+                datePublication={item.date}
+                publicationTitle={item.data}
+                imagePublication={item.image}
+                comment={item.comment.length}
+                share={item.share.length}
+                like={item.like.length}
+                view={item.view.length}
               />
               <View style={styles.separatorPublication}></View>
             </View>
           )}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
     </View>
@@ -47,13 +65,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "#1f1f1f",
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingHorizontal: 16,
   },
   publicationsContainer: {
     backgroundColor: "#2f2f2f",
     paddingVertical: 20,
-    marginTop: 10,
+    marginTop: 17,
     borderRadius: 16,
   },
   separatorPublication: {

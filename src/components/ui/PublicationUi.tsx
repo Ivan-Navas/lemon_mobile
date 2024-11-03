@@ -40,12 +40,15 @@ const PublicationComponent = ({
           <Text style={styles.publicationText}>{publicationTitle}</Text>
         </View>
       </View>
-      <Image
-        style={styles.publicationImage}
-        source={{
-          uri: imagePublication,
-        }}
-      />
+      {imagePublication && (
+        <Image
+          style={styles.publicationImage}
+          source={{
+            uri: imagePublication,
+          }}
+        />
+      )}
+
       <View style={styles.statsContainer}>
         <Stat image={statIcon.comment} value={comment} />
         <Stat image={statIcon.share} value={share} />
@@ -60,7 +63,7 @@ export default PublicationComponent;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    paddingHorizontal: 5,
+    paddingHorizontal: 11,
   },
   userInfoContainer: {
     flexDirection: "row",

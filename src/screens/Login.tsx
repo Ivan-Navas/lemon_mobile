@@ -7,6 +7,7 @@ import {
   TextInput,
   Pressable,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -17,7 +18,7 @@ export default function Login({ navigation }: any) {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <ScrollView style={[styles.container, { paddingTop: insets.top }]}>
       <StatusBar style="light" />
       <View>
         <Text style={styles.loginTitle}>Inicio de Sesión</Text>
@@ -157,7 +158,7 @@ export default function Login({ navigation }: any) {
           </LinearGradient>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -213,6 +214,7 @@ const styles = StyleSheet.create({
   formContainer: {
     padding: 20,
     alignItems: "center",
+    marginBottom: 20,
   },
   input: {
     color: "#ffffff",
