@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Text } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import HeaderComponent from "../components/ui/HeaderUi";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import PublicationComponent from "../components/ui/PublicationUi";
 import { useScreenDimensions } from "../helpers/Dimension";
 import { FeedRequest, Post } from "../types/publication";
+import { useAppContext } from "../context";
 
 const FeedScreen = () => {
   const insets = useSafeAreaInsets();
   const { height } = useScreenDimensions();
-  const [feed, setFeed] = useState<Post[]>([]);
+  // const [feed, setFeed] = useState<Post[]>([]);
+  const { feed } = useAppContext();
 
   function formatDate(date: Date) {
     return date.toLocaleDateString("en-GB", {
@@ -19,20 +21,6 @@ const FeedScreen = () => {
       year: "numeric",
     });
   }
-
-  useEffect(() => {
-    const fecthData = async () => {
-      const request = await fetch(
-        "http://192.168.1.5:3000/api/publication/feed",
-        {
-          method: "GET",
-        },
-      );
-      const data: FeedRequest = await request.json();
-      setFeed(data.feed);
-    };
-    fecthData();
-  }, []);
 
   return (
     <View style={[styles.mainContainer, { paddingTop: insets.top }]}>

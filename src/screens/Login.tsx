@@ -13,9 +13,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import LemonName from "../../assets/svg/LemonName";
 import GradientText from "../components/utils/GradientText";
+import { useAppContext } from "../context";
 
 export default function Login({ navigation }: any) {
   const insets = useSafeAreaInsets();
+  const { getFeed } = useAppContext();
 
   return (
     <ScrollView style={[styles.container, { paddingTop: insets.top }]}>
@@ -102,7 +104,9 @@ export default function Login({ navigation }: any) {
         <Pressable
           style={styles.pressable}
           onPress={() => {
-            navigation.navigate("Main");
+            // console.log("hola mundo")
+            getFeed("mensaje");
+            // navigation.navigate("Main");
           }}
         >
           <LinearGradient
